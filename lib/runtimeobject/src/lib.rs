@@ -6,4 +6,9 @@
 extern crate winapi;
 use winapi::*;
 extern "system" {
+    pub fn RoInitialize(initType: RO_INIT_TYPE,) -> HRESULT;
+    pub fn RoUninitialize() -> HRESULT;
+    pub fn RoGetActivationFactory(
+        activatableClassId: HSTRING, iid: REFIID, factory: *mut *mut c_void,    
+    ) -> HRESULT;
 }
