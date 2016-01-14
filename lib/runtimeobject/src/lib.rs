@@ -1,8 +1,7 @@
 // Copyright © 2015, Peter Atashian
 // Licensed under the MIT License <LICENSE.md>
 //! FFI bindings to runtimeobject.
-#![no_std]
-#![experimental]
+#![cfg(windows)]
 extern crate winapi;
 use winapi::*;
 extern "system" {
@@ -11,4 +10,12 @@ extern "system" {
     pub fn RoGetActivationFactory(
         activatableClassId: HSTRING, iid: REFIID, factory: *mut *mut c_void,    
     ) -> HRESULT;
+    
+    pub fn WindowsCreateString(
+        sourceString: PCNZWCH, length: UINT32, string: *mut HSTRING
+    );
+    pub fn WindowsCreateStringReference(
+        sourceString: PCWSTR, length: UINT32,
+        hstringHeader: *mut HSTRING_HEADER, string: *mut HSTRING
+    );    
 }
