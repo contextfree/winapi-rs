@@ -13,9 +13,9 @@ extern "system" {
     
     pub fn WindowsCreateString(
         sourceString: PCNZWCH, length: UINT32, string: *mut HSTRING
-    );
+    ) -> HRESULT;
     pub fn WindowsCreateStringReference(
         sourceString: PCWSTR, length: UINT32,
         hstringHeader: *mut HSTRING_HEADER, string: *mut HSTRING
-    );    
+    ) -> HRESULT;    
 }
