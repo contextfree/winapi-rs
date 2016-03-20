@@ -61,7 +61,9 @@ extern "system" {
     // pub fn WindowsDeleteStringBuffer();
     // pub fn WindowsDuplicateString();
     // pub fn WindowsGetStringLen();
-    // pub fn WindowsGetStringRawBuffer();
+    pub fn WindowsGetStringRawBuffer(
+        string: HSTRING, length: *mut UINT32
+    ) -> PCWSTR;
     // pub fn WindowsInspectString();
     // pub fn WindowsIsStringEmpty();
     // pub fn WindowsPreallocateStringBuffer();
