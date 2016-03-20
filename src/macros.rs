@@ -27,12 +27,13 @@ macro_rules! MAKEFOURCC {
         ($a as i32) | (($b as i32) << 8) | (($c as i32) << 16) | (($d as i32) << 24)
     }
 }
+#[macro_export]
 macro_rules! DEFINE_GUID {
     (
         $name:ident, $l:expr, $w1:expr, $w2:expr, $b1:expr, $b2:expr, $b3:expr, $b4:expr, $b5:expr,
         $b6:expr, $b7:expr, $b8:expr
     ) => {
-        pub const $name: ::GUID = ::GUID {
+        pub const $name: $crate::GUID = $crate::GUID {
             Data1: $l,
             Data2: $w1,
             Data3: $w2,
@@ -80,6 +81,7 @@ macro_rules! BCRYPT_MAKE_INTERFACE_VERSION {
         ::BCRYPT_INTERFACE_VERSION { MajorVersion: $major, MinorVersion: $minor }
     }
 }
+#[macro_export]
 macro_rules! RIDL {
     (interface $interface:ident ($vtbl:ident)
         {$(
@@ -87,7 +89,7 @@ macro_rules! RIDL {
         ),+}
     ) => {
         #[repr(C)] #[allow(missing_copy_implementations)]
-        pub struct $vtbl {
+        pub  $vtbl {
             $(pub $method: unsafe extern "system" fn(
                 This: *mut $interface
                 $(,$p: $t)*
@@ -108,22 +110,22 @@ macro_rules! RIDL {
     }) => {
         #[repr(C)] #[allow(missing_copy_implementations)]
         pub struct $vtbl {
-            pub parent: ::$pvtbl
+            pub parent: $crate::$pvtbl
         }
         #[repr(C)] #[derive(Debug)] #[allow(missing_copy_implementations)]
         pub struct $interface {
             pub lpVtbl: *const $vtbl
         }
         impl ::std::ops::Deref for $interface {
-            type Target = ::$pinterface;
+            type Target = $crate::$pinterface;
             #[inline]
-            fn deref(&self) -> &::$pinterface {
+            fn deref(&self) -> &$crate::$pinterface {
                 unsafe { ::std::mem::transmute(self) }
             }
         }
         impl ::std::ops::DerefMut for $interface {
             #[inline]
-            fn deref_mut(&mut self) -> &mut ::$pinterface {
+            fn deref_mut(&mut self) -> &mut $crate::$pinterface {
                 unsafe { ::std::mem::transmute(self) }
             }
         }
@@ -135,7 +137,7 @@ macro_rules! RIDL {
     ) => {
         #[repr(C)] #[allow(missing_copy_implementations)]
         pub struct $vtbl {
-            pub parent: ::$pvtbl
+            pub parent: $crate::$pvtbl
             $(,pub $method: unsafe extern "system" fn(
                 This: *mut $interface
                 $(,$p: $t)*
@@ -152,15 +154,15 @@ macro_rules! RIDL {
             })+
         }
         impl ::std::ops::Deref for $interface {
-            type Target = ::$pinterface;
+            type Target = $crate::$pinterface;
             #[inline]
-            fn deref(&self) -> &::$pinterface {
+            fn deref(&self) -> &$crate::$pinterface {
                 unsafe { ::std::mem::transmute(self) }
             }
         }
         impl ::std::ops::DerefMut for $interface {
             #[inline]
-            fn deref_mut(&mut self) -> &mut ::$pinterface {
+            fn deref_mut(&mut self) -> &mut $crate::$pinterface {
                 unsafe { ::std::mem::transmute(self) }
             }
         }
@@ -199,6 +201,7 @@ macro_rules! BITFIELD {
         )+}
     }
 }
+#[macro_export]
 macro_rules! ENUM {
     {enum $name:ident { $($variant:ident = $value:expr,)+ }} => {
         #[repr(C)] #[derive(Clone, Copy, Debug, Eq, PartialEq)]
