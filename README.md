@@ -8,7 +8,7 @@ This crate provides types and constants for WinAPI FFI bindings. They are gather
 
 If this crate is missing something you need, feel free to create an issue, open a pull request, or contact me via [other means](http://www.rustaceans.org/retep998).
 
-As of version 0.2, this crate depends on Rust 1.1 (in order to lose the dependency on libc). If you need compatibility with Rust 1.0 you must continue to use older 0.1.x versions.
+This crate depends on Rust 1.4 on Windows. On other platforms this crate is a no-op and should compile with Rust 1.0.
 
 ## Example ##
 
@@ -38,6 +38,7 @@ These are the ones that actually have functions in them:
 * [d2d1-sys ![Crates.io](https://img.shields.io/crates/v/d2d1-sys.svg)](https://crates.io/crates/d2d1-sys)
 * [d3d9-sys ![Crates.io](https://img.shields.io/crates/v/d3d9-sys.svg)](https://crates.io/crates/d3d9-sys)
 * [d3d11-sys ![Crates.io](https://img.shields.io/crates/v/d3d11-sys.svg)](https://crates.io/crates/d3d11-sys)
+* [d3dcompiler-sys ![Crates.io](https://img.shields.io/crates/v/d3dcompiler-sys.svg)](https://crates.io/crates/d3dcompiler-sys)
 * [dbghelp-sys ![Crates.io](https://img.shields.io/crates/v/dbghelp-sys.svg)](https://crates.io/crates/dbghelp-sys)
 * [dsound-sys ![Crates.io](https://img.shields.io/crates/v/dsound-sys.svg)](https://crates.io/crates/dsound-sys)
 * [dwmapi-sys ![Crates.io](https://img.shields.io/crates/v/dwmapi-sys.svg)](https://crates.io/crates/dwmapi-sys)
@@ -116,7 +117,6 @@ These are the ones that are reserved for future use:
 * [cscdll-sys ![Crates.io](https://img.shields.io/crates/v/cscdll-sys.svg)](https://crates.io/crates/cscdll-sys)
 * [d3d10-sys ![Crates.io](https://img.shields.io/crates/v/d3d10-sys.svg)](https://crates.io/crates/d3d10-sys)
 * [d3d10_1-sys ![Crates.io](https://img.shields.io/crates/v/d3d10_1-sys.svg)](https://crates.io/crates/d3d10_1-sys)
-* [d3dcompiler-sys ![Crates.io](https://img.shields.io/crates/v/d3dcompiler-sys.svg)](https://crates.io/crates/d3dcompiler-sys)
 * [d3dcsx-sys ![Crates.io](https://img.shields.io/crates/v/d3dcsx-sys.svg)](https://crates.io/crates/d3dcsx-sys)
 * [d3dcsxd-sys ![Crates.io](https://img.shields.io/crates/v/d3dcsxd-sys.svg)](https://crates.io/crates/d3dcsxd-sys)
 * [davclnt-sys ![Crates.io](https://img.shields.io/crates/v/davclnt-sys.svg)](https://crates.io/crates/davclnt-sys)

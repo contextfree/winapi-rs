@@ -44,107 +44,93 @@ ENUM!{ enum _DXGI_OFFER_RESOURCE_PRIORITY {
     DXGI_OFFER_RESOURCE_PRIORITY_HIGH = 3,
 }}
 
-#[repr(C)] #[derive(Copy)]
-pub struct DXGI_ADAPTER_DESC2 {
-    pub Description: [::WCHAR; 128],
-    pub VendorId: ::UINT,
-    pub DeviceId: ::UINT,
-    pub SubSysId: ::UINT,
-    pub Revision: ::UINT,
-    pub DedicatedVideoMemory: ::SIZE_T,
-    pub DedicatedSystemMemory: ::SIZE_T,
-    pub SharedSystemMemory: ::SIZE_T,
-    pub AdapterLuid: ::LUID,
-    pub Flags: ::UINT,
-    pub GraphicsPreemptionGranularity: ::DXGI_GRAPHICS_PREEMPTION_GRANULARITY,
-    pub ComputePreemptionGranularity: ::DXGI_COMPUTE_PREEMPTION_GRANULARITY,
-}
+STRUCT!{nodebug struct DXGI_ADAPTER_DESC2 {
+    Description: [::WCHAR; 128],
+    VendorId: ::UINT,
+    DeviceId: ::UINT,
+    SubSysId: ::UINT,
+    Revision: ::UINT,
+    DedicatedVideoMemory: ::SIZE_T,
+    DedicatedSystemMemory: ::SIZE_T,
+    SharedSystemMemory: ::SIZE_T,
+    AdapterLuid: ::LUID,
+    Flags: ::UINT,
+    GraphicsPreemptionGranularity: ::DXGI_GRAPHICS_PREEMPTION_GRANULARITY,
+    ComputePreemptionGranularity: ::DXGI_COMPUTE_PREEMPTION_GRANULARITY,
+}}
 
-impl Clone for DXGI_ADAPTER_DESC2 {
-    fn clone(&self) -> Self { *self }
-}
+STRUCT!{struct DXGI_MODE_DESC1 {
+    Width: ::UINT,
+    Height: ::UINT,
+    RefreshRate: ::DXGI_RATIONAL,
+    Format: ::DXGI_FORMAT,
+    ScanlineOrdering: ::DXGI_MODE_SCANLINE_ORDER,
+    Scaling: ::DXGI_MODE_SCALING,
+    Stereo: ::BOOL,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DXGI_MODE_DESC1 {
-    pub Width: ::UINT,
-    pub Height: ::UINT,
-    pub RefreshRate: ::DXGI_RATIONAL,
-    pub Format: ::DXGI_FORMAT,
-    pub ScanlineOrdering: ::DXGI_MODE_SCANLINE_ORDER,
-    pub Scaling: ::DXGI_MODE_SCALING,
-    pub Stereo: ::BOOL,
-}
+STRUCT!{struct DXGI_OUTDUPL_DESC {
+    ModeDesc: ::DXGI_MODE_DESC,
+    Rotation: ::DXGI_MODE_ROTATION,
+    DesktopImageInSystemMemory: ::BOOL,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DXGI_OUTDUPL_DESC {
-    pub ModeDesc: ::DXGI_MODE_DESC,
-    pub Rotation: ::DXGI_MODE_ROTATION,
-    pub DesktopImageInSystemMemory: ::BOOL,
-}
+STRUCT!{struct DXGI_OUTDUPL_FRAME_INFO {
+    LastPresentTime: ::LARGE_INTEGER,
+    LastMouseUpdateTime: ::LARGE_INTEGER,
+    AccumulatedFrames: ::UINT,
+    RectsCoalesced: ::BOOL,
+    ProtectedContentMaskedOut: ::BOOL,
+    PointerPosition: ::DXGI_OUTDUPL_POINTER_POSITION,
+    TotalMetadataBufferSize: ::UINT,
+    PointerShapeBufferSize: ::UINT,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DXGI_OUTDUPL_FRAME_INFO {
-    pub LastPresentTime: ::LARGE_INTEGER,
-    pub LastMouseUpdateTime: ::LARGE_INTEGER,
-    pub AccumulatedFrames: ::UINT,
-    pub RectsCoalesced: ::BOOL,
-    pub ProtectedContentMaskedOut: ::BOOL,
-    pub PointerPosition: ::DXGI_OUTDUPL_POINTER_POSITION,
-    pub TotalMetadataBufferSize: ::UINT,
-    pub PointerShapeBufferSize: ::UINT,
-}
+STRUCT!{struct DXGI_OUTDUPL_MOVE_RECT {
+    SourcePoint: ::POINT,
+    DestinationRect: ::RECT,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DXGI_OUTDUPL_MOVE_RECT {
-    pub SourcePoint: ::POINT,
-    pub DestinationRect: ::RECT,
-}
+STRUCT!{struct DXGI_OUTDUPL_POINTER_POSITION {
+    Position: ::POINT,
+    Visible: ::BOOL,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DXGI_OUTDUPL_POINTER_POSITION {
-    pub Position: ::POINT,
-    pub Visible: ::BOOL,
-}
+STRUCT!{struct DXGI_OUTDUPL_POINTER_SHAPE_INFO {
+    Type: ::UINT,
+    Width: ::UINT,
+    Height: ::UINT,
+    Pitch: ::UINT,
+    HotSpot: ::POINT,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DXGI_OUTDUPL_POINTER_SHAPE_INFO {
-    pub Type: ::UINT,
-    pub Width: ::UINT,
-    pub Height: ::UINT,
-    pub Pitch: ::UINT,
-    pub HotSpot: ::POINT,
-}
+STRUCT!{struct DXGI_PRESENT_PARAMETERS {
+    DirtyRectsCount: ::UINT,
+    pDirtyRects: *mut ::RECT,
+    pScrollRect: *mut ::RECT,
+    pScrollOffset: *mut ::POINT,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DXGI_PRESENT_PARAMETERS {
-    pub DirtyRectsCount: ::UINT,
-    pub pDirtyRects: *mut ::RECT,
-    pub pScrollRect: *mut ::RECT,
-    pub pScrollOffset: *mut ::POINT,
-}
+STRUCT!{struct DXGI_SWAP_CHAIN_DESC1 {
+    Width: ::UINT,
+    Height: ::UINT,
+    Format: ::DXGI_FORMAT,
+    Stereo: ::BOOL,
+    SampleDesc: ::DXGI_SAMPLE_DESC,
+    BufferUsage: ::DXGI_USAGE,
+    BufferCount: ::UINT,
+    Scaling: ::DXGI_SCALING,
+    SwapEffect: ::DXGI_SWAP_EFFECT,
+    AlphaMode: ::DXGI_ALPHA_MODE,
+    Flags: ::UINT,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DXGI_SWAP_CHAIN_DESC1 {
-    pub Width: ::UINT,
-    pub Height: ::UINT,
-    pub Format: ::DXGI_FORMAT,
-    pub Stereo: ::BOOL,
-    pub SampleDesc: ::DXGI_SAMPLE_DESC,
-    pub BufferUsage: ::DXGI_USAGE,
-    pub BufferCount: ::UINT,
-    pub Scaling: ::DXGI_SCALING,
-    pub SwapEffect: ::DXGI_SWAP_EFFECT,
-    pub AlphaMode: ::DXGI_ALPHA_MODE,
-    pub Flags: ::UINT,
-}
-
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DXGI_SWAP_CHAIN_FULLSCREEN_DESC {
-    pub RefreshRate: ::DXGI_RATIONAL,
-    pub ScanlineOrdering: ::DXGI_MODE_SCANLINE_ORDER,
-    pub Scaling: ::DXGI_MODE_SCALING,
-    pub Windowed: ::BOOL,
-}
+STRUCT!{struct DXGI_SWAP_CHAIN_FULLSCREEN_DESC {
+    RefreshRate: ::DXGI_RATIONAL,
+    ScanlineOrdering: ::DXGI_MODE_SCANLINE_ORDER,
+    Scaling: ::DXGI_MODE_SCALING,
+    Windowed: ::BOOL,
+}}
 
 RIDL!(
 interface IDXGIAdapter2(IDXGIAdapter2Vtbl): IDXGIAdapter1(IDXGIAdapter1Vtbl) {
@@ -300,22 +286,3 @@ pub const DXGI_ENUM_MODES_DISABLED_STEREO: ::UINT = 8;
 pub const DXGI_ENUM_MODES_STEREO: ::UINT = 4;
 pub const DXGI_SHARED_RESOURCE_READ: ::UINT = 0x80000000;
 pub const DXGI_SHARED_RESOURCE_WRITE: ::UINT = 1;
-
-DEFINE_GUID!(IID_IDXGIDisplayControl,0xea9dbf1a,0xc88e,0x4486,0x85,0x4a,0x98,
-    0xaa,0x01,0x38,0xf3,0x0c);
-DEFINE_GUID!(IID_IDXGIOutputDuplication,0x191cfac3,0xa341,0x470d,0xb2,0x6e,
-    0xa8,0x64,0xf4,0x28,0x31,0x9c);
-DEFINE_GUID!(IID_IDXGISurface2,0xaba496dd,0xb617,0x4cb8,0xa8,0x66,0xbc,0x44,
-    0xd7,0xeb,0x1f,0xa2);
-DEFINE_GUID!(IID_IDXGIResource1,0x30961379,0x4609,0x4a41,0x99,0x8e,0x54,0xfe,
-    0x56,0x7e,0xe0,0xc1);
-DEFINE_GUID!(IID_IDXGIDevice2,0x05008617,0xfbfd,0x4051,0xa7,0x90,0x14,0x48,
-    0x84,0xb4,0xf6,0xa9);
-DEFINE_GUID!(IID_IDXGISwapChain1,0x790a45f7,0x0d42,0x4876,0x98,0x3a,0x0a,0x55,
-    0xcf,0xe6,0xf4,0xaa);
-DEFINE_GUID!(IID_IDXGIFactory2,0x50c83a1c,0xe072,0x4c48,0x87,0xb0,0x36,0x30,
-    0xfa,0x36,0xa6,0xd0);
-DEFINE_GUID!(IID_IDXGIAdapter2,0x0AA1AE0A,0xFA0E,0x4B84,0x86,0x44,0xE0,0x5F,
-    0xF8,0xE5,0xAC,0xB5);
-DEFINE_GUID!(IID_IDXGIOutput1,0x00cddea8,0x939b,0x4b83,0xa3,0x40,0xa6,0x85,
-    0x22,0x66,0x66,0xcc);

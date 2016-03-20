@@ -1,6 +1,101 @@
 // Copyright © 2015, Peter Atashian
 // Licensed under the MIT License <LICENSE.md>
 //! USER procedure declarations, constant definitions and macros
+
+// Edit Control Styles
+//
+pub const ES_LEFT: ::DWORD = 0x0000;
+pub const ES_CENTER: ::DWORD = 0x0001;
+pub const ES_RIGHT: ::DWORD = 0x0002;
+pub const ES_MULTILINE: ::DWORD = 0x0004;
+pub const ES_UPPERCASE: ::DWORD = 0x0008;
+pub const ES_LOWERCASE: ::DWORD = 0x0010;
+pub const ES_PASSWORD: ::DWORD = 0x0020;
+pub const ES_AUTOVSCROLL: ::DWORD = 0x0040;
+pub const ES_AUTOHSCROLL: ::DWORD = 0x0080;
+pub const ES_NOHIDESEL: ::DWORD = 0x0100;
+pub const ES_OEMCONVERT: ::DWORD = 0x0400;
+pub const ES_READONLY: ::DWORD = 0x0800;
+pub const ES_WANTRETURN: ::DWORD = 0x1000;
+pub const ES_NUMBER: ::DWORD = 0x2000;
+
+// Edit Control Notification Codes
+//
+pub const EN_SETFOCUS: ::WORD = 0x0100;
+pub const EN_KILLFOCUS: ::WORD = 0x0200;
+pub const EN_CHANGE: ::WORD = 0x0300;
+pub const EN_UPDATE: ::WORD = 0x0400;
+pub const EN_ERRSPACE: ::WORD = 0x0500;
+pub const EN_MAXTEXT: ::WORD = 0x0501;
+pub const EN_HSCROLL: ::WORD = 0x0601;
+pub const EN_VSCROLL: ::WORD = 0x0602;
+
+pub const EN_ALIGN_LTR_EC: ::WORD = 0x0700;
+pub const EN_ALIGN_RTL_EC: ::WORD = 0x0701;
+
+// Edit control EM_SETMARGIN parameters
+pub const EC_LEFTMARGIN: ::WORD = 0x0001;
+pub const EC_RIGHTMARGIN: ::WORD = 0x0002;
+pub const EC_USEFONTINFO: ::WORD = 0xffff;
+
+// wParam of EM_GET/SETIMESTATUS
+pub const EMSIS_COMPOSITIONSTRING: ::WORD = 0x0001;
+
+// lParam for EMSIS_COMPOSITIONSTRING
+pub const EIMES_GETCOMPSTRATONCE: ::WORD = 0x0001;
+pub const EIMES_CANCELCOMPSTRINFOCUS: ::WORD = 0x0002;
+pub const EIMES_COMPLETECOMPSTRKILLFOCUS: ::WORD = 0x0004;
+
+// Edit Control Messages
+//
+pub const EM_GETSEL: ::WORD = 0x00B0;
+pub const EM_SETSEL: ::WORD = 0x00B1;
+pub const EM_GETRECT: ::WORD = 0x00B2;
+pub const EM_SETRECT: ::WORD = 0x00B3;
+pub const EM_SETRECTNP: ::WORD = 0x00B4;
+pub const EM_SCROLL: ::WORD = 0x00B5;
+pub const EM_LINESCROLL: ::WORD = 0x00B6;
+pub const EM_SCROLLCARET: ::WORD = 0x00B7;
+pub const EM_GETMODIFY: ::WORD = 0x00B8;
+pub const EM_SETMODIFY: ::WORD = 0x00B9;
+pub const EM_GETLINECOUNT: ::WORD = 0x00BA;
+pub const EM_LINEINDEX: ::WORD = 0x00BB;
+pub const EM_SETHANDLE: ::WORD = 0x00BC;
+pub const EM_GETHANDLE: ::WORD = 0x00BD;
+pub const EM_GETTHUMB: ::WORD = 0x00BE;
+pub const EM_LINELENGTH: ::WORD = 0x00C1;
+pub const EM_REPLACESEL: ::WORD = 0x00C2;
+pub const EM_GETLINE: ::WORD = 0x00C4;
+pub const EM_LIMITTEXT: ::WORD = 0x00C5;
+pub const EM_CANUNDO: ::WORD = 0x00C6;
+pub const EM_UNDO: ::WORD = 0x00C7;
+pub const EM_FMTLINES: ::WORD = 0x00C8;
+pub const EM_LINEFROMCHAR: ::WORD = 0x00C9;
+pub const EM_SETTABSTOPS: ::WORD = 0x00CB;
+pub const EM_SETPASSWORDCHAR: ::WORD = 0x00CC;
+pub const EM_EMPTYUNDOBUFFER: ::WORD = 0x00CD;
+pub const EM_GETFIRSTVISIBLELINE: ::WORD = 0x00CE;
+pub const EM_SETREADONLY: ::WORD = 0x00CF;
+pub const EM_SETWORDBREAKPROC: ::WORD = 0x00D0;
+pub const EM_GETWORDBREAKPROC: ::WORD = 0x00D1;
+pub const EM_GETPASSWORDCHAR: ::WORD = 0x00D2;
+
+pub const EM_SETMARGINS: ::WORD = 0x00D3;
+pub const EM_GETMARGINS: ::WORD = 0x00D4;
+pub const EM_SETLIMITTEXT: ::WORD = EM_LIMITTEXT;
+pub const EM_GETLIMITTEXT: ::WORD = 0x00D5;
+pub const EM_POSFROMCHAR: ::WORD = 0x00D6;
+pub const EM_CHARFROMPOS: ::WORD = 0x00D7;
+
+pub const EM_SETIMESTATUS: ::WORD = 0x00D8;
+pub const EM_GETIMESTATUS: ::WORD = 0x00D9;
+
+// EDITWORDBREAKPROC code values
+//
+pub const WB_LEFT: ::WORD = 0;
+pub const WB_RIGHT: ::WORD = 1;
+pub const WB_ISDELIMITER: ::WORD = 2;
+
 pub const BN_CLICKED: ::WORD = 0;
 pub const BN_PAINT: ::WORD = 1;
 pub const BN_HILITE: ::WORD = 2;
@@ -65,6 +160,42 @@ pub const CS_BYTEALIGNWINDOW: ::DWORD = 0x2000;
 pub const CS_GLOBALCLASS: ::DWORD = 0x4000;
 pub const CS_IME: ::DWORD = 0x00010000;
 pub const CS_DROPSHADOW: ::DWORD = 0x00020000;
+pub const DFC_CAPTION: ::UINT = 1;
+pub const DFC_MENU: ::UINT = 2;
+pub const DFC_SCROLL: ::UINT = 3;
+pub const DFC_BUTTON: ::UINT = 4;
+pub const DFCS_CAPTIONCLOSE: ::UINT = 0x0000;
+pub const DFCS_CAPTIONMIN: ::UINT = 0x0001;
+pub const DFCS_CAPTIONMAX: ::UINT = 0x0002;
+pub const DFCS_CAPTIONRESTORE: ::UINT = 0x0003;
+pub const DFCS_CAPTIONHELP: ::UINT = 0x0004;
+pub const DFCS_MENUARROW: ::UINT = 0x0000;
+pub const DFCS_MENUCHECK: ::UINT = 0x0001;
+pub const DFCS_MENUBULLET: ::UINT = 0x0002;
+pub const DFCS_MENUARROWRIGHT: ::UINT = 0x0004;
+pub const DFCS_SCROLLUP: ::UINT = 0x0000;
+pub const DFCS_SCROLLDOWN: ::UINT = 0x0001;
+pub const DFCS_SCROLLLEFT: ::UINT = 0x0002;
+pub const DFCS_SCROLLRIGHT: ::UINT = 0x0003;
+pub const DFCS_SCROLLCOMBOBOX: ::UINT = 0x0005;
+pub const DFCS_SCROLLSIZEGRIP: ::UINT = 0x0008;
+pub const DFCS_SCROLLSIZEGRIPRIGHT: ::UINT = 0x0010;
+pub const DFCS_BUTTONCHECK: ::UINT = 0x0000;
+pub const DFCS_BUTTONRADIOIMAGE: ::UINT = 0x0001;
+pub const DFCS_BUTTONRADIOMASK: ::UINT = 0x0002;
+pub const DFCS_BUTTONRADIO: ::UINT = 0x0004;
+pub const DFCS_BUTTON3STATE: ::UINT = 0x0008;
+pub const DFCS_BUTTONPUSH: ::UINT = 0x0010;
+pub const DFCS_INACTIVE: ::UINT = 0x0100;
+pub const DFCS_PUSHED: ::UINT = 0x0200;
+pub const DFCS_CHECKED: ::UINT = 0x0400;
+// if WINVER >= 0x0500
+pub const DFCS_TRANSPARENT: ::UINT = 0x0800;
+pub const DFCS_HOT: ::UINT = 0x1000;
+// end if WINVER >= 0x0500
+pub const DFCS_ADJUSTRECT: ::UINT = 0x2000;
+pub const DFCS_FLAT: ::UINT = 0x4000;
+pub const DFCS_MONO: ::UINT = 0x8000;
 pub const CW_USEDEFAULT: ::c_int = 0x80000000u32 as ::c_int;
 pub const DISP_CHANGE_SUCCESSFUL: ::LONG = 0;
 pub const DISP_CHANGE_RESTART: ::LONG = 1;
@@ -157,6 +288,18 @@ pub const MB_ICONMASK: ::DWORD = 0x000000F0;
 pub const MB_DEFMASK: ::DWORD = 0x00000F00;
 pub const MB_MODEMASK: ::DWORD = 0x00003000;
 pub const MB_MISCMASK: ::DWORD = 0x0000C000;
+pub const MF_BITMAP: ::UINT = 0x00000004;
+pub const MF_CHECKED: ::UINT = 0x00000008;
+pub const MF_DISABLED: ::UINT = 0x00000002;
+pub const MF_ENABLED: ::UINT = 0x00000000;
+pub const MF_GRAYED: ::UINT = 0x00000001;
+pub const MF_MENUBARBREAK: ::UINT = 0x00000020;
+pub const MF_MENUBREAK: ::UINT = 0x00000040;
+pub const MF_OWNERDRAW: ::UINT = 0x00000100;
+pub const MF_POPUP: ::UINT = 0x00000010;
+pub const MF_SEPARATOR: ::UINT = 0x00000800;
+pub const MF_STRING: ::UINT = 0x00000000;
+pub const MF_UNCHECKED: ::UINT = 0x00000000;
 pub const SB_HORZ: ::c_int = 0;
 pub const SB_VERT: ::c_int = 1;
 pub const SB_CTL: ::c_int = 2;
@@ -351,6 +494,65 @@ pub const VK_ZOOM: ::c_int = 0xFB;
 pub const VK_NONAME: ::c_int = 0xFC;
 pub const VK_PA1: ::c_int = 0xFD;
 pub const VK_OEM_CLEAR: ::c_int = 0xFE;
+// if _WIN32_WINNT >= 0x0500
+pub const APPCOMMAND_BROWSER_BACKWARD: ::c_short = 1;
+pub const APPCOMMAND_BROWSER_FORWARD: ::c_short = 2;
+pub const APPCOMMAND_BROWSER_REFRESH: ::c_short = 3;
+pub const APPCOMMAND_BROWSER_STOP: ::c_short = 4;
+pub const APPCOMMAND_BROWSER_SEARCH: ::c_short = 5;
+pub const APPCOMMAND_BROWSER_FAVORITES: ::c_short = 6;
+pub const APPCOMMAND_BROWSER_HOME: ::c_short = 7;
+pub const APPCOMMAND_VOLUME_MUTE: ::c_short = 8;
+pub const APPCOMMAND_VOLUME_DOWN: ::c_short = 9;
+pub const APPCOMMAND_VOLUME_UP: ::c_short = 10;
+pub const APPCOMMAND_MEDIA_NEXTTRACK: ::c_short = 11;
+pub const APPCOMMAND_MEDIA_PREVIOUSTRACK: ::c_short = 12;
+pub const APPCOMMAND_MEDIA_STOP: ::c_short = 13;
+pub const APPCOMMAND_MEDIA_PLAY_PAUSE: ::c_short = 14;
+pub const APPCOMMAND_LAUNCH_MAIL: ::c_short = 15;
+pub const APPCOMMAND_LAUNCH_MEDIA_SELECT: ::c_short = 16;
+pub const APPCOMMAND_LAUNCH_APP1: ::c_short = 17;
+pub const APPCOMMAND_LAUNCH_APP2: ::c_short = 18;
+pub const APPCOMMAND_BASS_DOWN: ::c_short = 19;
+pub const APPCOMMAND_BASS_BOOST: ::c_short = 20;
+pub const APPCOMMAND_BASS_UP: ::c_short = 21;
+pub const APPCOMMAND_TREBLE_DOWN: ::c_short = 22;
+pub const APPCOMMAND_TREBLE_UP: ::c_short = 23;
+// if _WIN32_WINNT >= 0x0501
+pub const APPCOMMAND_MICROPHONE_VOLUME_MUTE: ::c_short = 24;
+pub const APPCOMMAND_MICROPHONE_VOLUME_DOWN: ::c_short = 25;
+pub const APPCOMMAND_MICROPHONE_VOLUME_UP: ::c_short = 26;
+pub const APPCOMMAND_HELP: ::c_short = 27;
+pub const APPCOMMAND_FIND: ::c_short = 28;
+pub const APPCOMMAND_NEW: ::c_short = 29;
+pub const APPCOMMAND_OPEN: ::c_short = 30;
+pub const APPCOMMAND_CLOSE: ::c_short = 31;
+pub const APPCOMMAND_SAVE: ::c_short = 32;
+pub const APPCOMMAND_PRINT: ::c_short = 33;
+pub const APPCOMMAND_UNDO: ::c_short = 34;
+pub const APPCOMMAND_REDO: ::c_short = 35;
+pub const APPCOMMAND_COPY: ::c_short = 36;
+pub const APPCOMMAND_CUT: ::c_short = 37;
+pub const APPCOMMAND_PASTE: ::c_short = 38;
+pub const APPCOMMAND_REPLY_TO_MAIL: ::c_short = 39;
+pub const APPCOMMAND_FORWARD_MAIL: ::c_short = 40;
+pub const APPCOMMAND_SEND_MAIL: ::c_short = 41;
+pub const APPCOMMAND_SPELL_CHECK: ::c_short = 42;
+pub const APPCOMMAND_DICTATE_OR_COMMAND_CONTROL_TOGGLE: ::c_short = 43;
+pub const APPCOMMAND_MIC_ON_OFF_TOGGLE: ::c_short = 44;
+pub const APPCOMMAND_CORRECTION_LIST: ::c_short = 45;
+pub const APPCOMMAND_MEDIA_PLAY: ::c_short = 46;
+pub const APPCOMMAND_MEDIA_PAUSE: ::c_short = 47;
+pub const APPCOMMAND_MEDIA_RECORD: ::c_short = 48;
+pub const APPCOMMAND_MEDIA_FAST_FORWARD: ::c_short = 49;
+pub const APPCOMMAND_MEDIA_REWIND: ::c_short = 50;
+pub const APPCOMMAND_MEDIA_CHANNEL_UP: ::c_short = 51;
+pub const APPCOMMAND_MEDIA_CHANNEL_DOWN: ::c_short = 52;
+// end if _WIN32_WINNT >= 0x0501
+// if _WIN32_WINNT >= 0x0600
+pub const APPCOMMAND_DELETE: ::c_short = 53;
+pub const APPCOMMAND_DWM_FLIP3D: ::c_short = 54;
+// end if _WIN32_WINNT >= 0x0600
 pub const WM_NULL: ::UINT = 0x0000;
 pub const WM_CREATE: ::UINT = 0x0001;
 pub const WM_DESTROY: ::UINT = 0x0002;
@@ -765,42 +967,45 @@ STRUCT!{struct WINDOWPLACEMENT {
 }}
 pub type PWINDOWPLACEMENT = *mut WINDOWPLACEMENT;
 pub type LPWINDOWPLACEMENT = *mut WINDOWPLACEMENT;
-#[repr(C)] #[derive(Copy)]
-pub struct WNDCLASSEXW {
-    pub cbSize: ::UINT,
-    pub style: ::UINT,
-    pub lpfnWndProc: WNDPROC,
-    pub cbClsExtra: ::c_int,
-    pub cbWndExtra: ::c_int,
-    pub hInstance: ::HINSTANCE,
-    pub hIcon: ::HICON,
-    pub hCursor: ::HCURSOR,
-    pub hbrBackground: ::HBRUSH,
-    pub lpszMenuName: ::LPCWSTR,
-    pub lpszClassName: ::LPCWSTR,
-    pub hIconSm: ::HICON,
-}
-impl Clone for WNDCLASSEXW { fn clone(&self) -> WNDCLASSEXW { *self } }
+STRUCT!{nodebug struct WNDCLASSEXW {
+    cbSize: ::UINT,
+    style: ::UINT,
+    lpfnWndProc: WNDPROC,
+    cbClsExtra: ::c_int,
+    cbWndExtra: ::c_int,
+    hInstance: ::HINSTANCE,
+    hIcon: ::HICON,
+    hCursor: ::HCURSOR,
+    hbrBackground: ::HBRUSH,
+    lpszMenuName: ::LPCWSTR,
+    lpszClassName: ::LPCWSTR,
+    hIconSm: ::HICON,
+}}
 pub type PWNDCLASSEXW = *mut WNDCLASSEXW;
 pub type NPWNDCLASSEXW = *mut WNDCLASSEXW;
 pub type LPWNDCLASSEXW = *mut WNDCLASSEXW;
-#[repr(C)] #[derive(Copy)]
-pub struct WNDCLASSW {
-    pub style: ::UINT,
-    pub lpfnWndProc: WNDPROC,
-    pub cbClsExtra: ::c_int,
-    pub cbWndExtra: ::c_int,
-    pub hInstance: ::HINSTANCE,
-    pub hIcon: ::HICON,
-    pub hCursor: ::HCURSOR,
-    pub hbrBackground: ::HBRUSH,
-    pub lpszMenuName: ::LPCWSTR,
-    pub lpszClassName: ::LPCWSTR
-}
-impl Clone for WNDCLASSW { fn clone(&self) -> WNDCLASSW { *self } }
+STRUCT!{nodebug struct WNDCLASSW {
+    style: ::UINT,
+    lpfnWndProc: WNDPROC,
+    cbClsExtra: ::c_int,
+    cbWndExtra: ::c_int,
+    hInstance: ::HINSTANCE,
+    hIcon: ::HICON,
+    hCursor: ::HCURSOR,
+    hbrBackground: ::HBRUSH,
+    lpszMenuName: ::LPCWSTR,
+    lpszClassName: ::LPCWSTR,
+}}
 pub type PWNDCLASSW = *mut WNDCLASSW;
 pub type NPWNDCLASSW = *mut WNDCLASSW;
 pub type LPWNDCLASSW = *mut WNDCLASSW;
+STRUCT!{struct MINMAXINFO {
+    ptReserved: ::POINT,
+    ptMaxSize: ::POINT,
+    ptMaxPosition: ::POINT,
+    ptMinTrackSize: ::POINT,
+    ptMaxTrackSize: ::POINT,
+}}
 STRUCT!{struct SCROLLBARINFO {
     cbSize: ::DWORD,
     rcScrollBar: ::RECT,
@@ -864,19 +1069,15 @@ STRUCT!{struct TRACKMOUSEEVENT {
 }}
 pub type LPTRACKMOUSEEVENT = *mut TRACKMOUSEEVENT;
 //2575
-/// lParam of WM_WINDOWPOSCHANGING, WM_WINDOWPOSCHANGED
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct WINDOWPOS {
-    pub hwnd: ::HWND,
-    /// hwnd or HWND_BOTTOM, HWND_NOTOPMOST, HWND_TOP, HWND_TOPMOST
-    pub hwndInsertAfter: ::HWND,
-    pub x: ::c_int,
-    pub y: ::c_int,
-    pub cx: ::c_int,
-    pub cy: ::c_int,
-    /// SWP_\*
-    pub flags: ::UINT,
-}
+STRUCT!{nodebug struct WINDOWPOS {
+    hwnd: ::HWND,
+    hwndInsertAfter: ::HWND,
+    x: ::c_int,
+    y: ::c_int,
+    cx: ::c_int,
+    cy: ::c_int,
+    flags: ::UINT,
+}}
 pub type LPWINDOWPOS = *mut WINDOWPOS;
 pub type PWINDOWPOS = *mut WINDOWPOS;
 //3082
@@ -911,13 +1112,11 @@ STRUCT!{struct CREATESTRUCTW {
 }}
 pub type LPCREATESTRUCTW = *mut CREATESTRUCTW;
 //3145
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-/// The lParam of the WM_NOTIFY message is a pointer to this structure
-pub struct NMHDR {
-    pub hwndFrom: ::HWND,
-    pub idFrom: ::UINT_PTR,
-    pub code: ::UINT,  // NM_ code
-}
+STRUCT!{struct NMHDR {
+    hwndFrom: ::HWND,
+    idFrom: ::UINT_PTR,
+    code: ::UINT,  // NM_ code
+}}
 pub type LPNMHDR = *mut NMHDR;
 //3400
 pub const PM_NOREMOVE: ::UINT = 0x0000;
@@ -1025,6 +1224,39 @@ UNION!{INPUT, u, ki, ki_mut, KEYBDINPUT}
 UNION!{INPUT, u, hi, hi_mut, HARDWAREINPUT}
 pub type PINPUT = *mut INPUT;
 pub type LPINPUT = *mut INPUT;
+// if WINVER >= 0x0601
+DECLARE_HANDLE!(HTOUCHINPUT, HTOUCHINPUT__);
+STRUCT!{struct TOUCHINPUT {
+    x: ::LONG,
+    y: ::LONG,
+    hSource: ::HANDLE,
+    dwID: ::DWORD,
+    dwFlags: ::DWORD,
+    dwMask: ::DWORD,
+    dwTime: ::DWORD,
+    dwExtraInfo: ::ULONG_PTR,
+    cxContact: ::DWORD,
+    cyContact: ::DWORD,
+}}
+pub type PTOUCHINPUT = *mut TOUCHINPUT;
+pub type PCTOUCHINPUT = *const TOUCHINPUT;
+//Touch input flag values (TOUCHINPUT.dwFlags)
+pub const TOUCHEVENTF_MOVE: ::DWORD = 0x0001;
+pub const TOUCHEVENTF_DOWN: ::DWORD = 0x0002;
+pub const TOUCHEVENTF_UP: ::DWORD = 0x0004;
+pub const TOUCHEVENTF_INRANGE: ::DWORD = 0x0008;
+pub const TOUCHEVENTF_PRIMARY: ::DWORD = 0x0010;
+pub const TOUCHEVENTF_NOCOALESCE: ::DWORD = 0x0020;
+pub const TOUCHEVENTF_PEN: ::DWORD = 0x0040;
+pub const TOUCHEVENTF_PALM: ::DWORD = 0x0080;
+//Touch input mask values (TOUCHINPUT.dwMask)
+pub const TOUCHINPUTMASKF_TIMEFROMSYSTEM: ::DWORD = 0x0001;
+pub const TOUCHINPUTMASKF_EXTRAINFO: ::DWORD = 0x0002;
+pub const TOUCHINPUTMASKF_CONTACTAREA: ::DWORD = 0x0004;
+//RegisterTouchWindow flag values
+pub const TWF_FINETOUCH: ::ULONG = 0x00000001;
+pub const TWF_WANTPALM: ::ULONG = 0x00000002;
+// end if WINVER >= 0x0601
 //Indices for GetWindowLong etc.
 pub const GWL_EXSTYLE: ::c_int = -20;
 pub const GWL_STYLE: ::c_int = -16;
@@ -1505,45 +1737,43 @@ pub const CB_GETDROPPEDWIDTH: ::UINT = 0x015f;
 pub const CB_SETDROPPEDWIDTH: ::UINT = 0x0160;
 pub const CB_INITSTORAGE: ::UINT = 0x0161;
 //12141
-#[repr(C)] #[derive(Clone, Copy)]
-pub struct NONCLIENTMETRICSA {
-    pub cbSize: ::UINT,
-    pub iBorderWidth: ::c_int,
-    pub iScrollWidth: ::c_int,
-    pub iScrollHeight: ::c_int,
-    pub iCaptionWidth: ::c_int,
-    pub iCaptionHeight: ::c_int,
-    pub lfCaptionFont: ::LOGFONTA,
-    pub iSmCaptionWidth: ::c_int,
-    pub iSmCaptionHeight: ::c_int,
-    pub lfSmCaptionFont: ::LOGFONTA,
-    pub iMenuWidth: ::c_int,
-    pub iMenuHeight: ::c_int,
-    pub lfMenuFont: ::LOGFONTA,
-    pub lfStatusFont: ::LOGFONTA,
-    pub lfMessageFont: ::LOGFONTA,
-    pub iPaddedBorderWidth: ::c_int,
-}
+STRUCT!{nodebug struct NONCLIENTMETRICSA {
+    cbSize: ::UINT,
+    iBorderWidth: ::c_int,
+    iScrollWidth: ::c_int,
+    iScrollHeight: ::c_int,
+    iCaptionWidth: ::c_int,
+    iCaptionHeight: ::c_int,
+    lfCaptionFont: ::LOGFONTA,
+    iSmCaptionWidth: ::c_int,
+    iSmCaptionHeight: ::c_int,
+    lfSmCaptionFont: ::LOGFONTA,
+    iMenuWidth: ::c_int,
+    iMenuHeight: ::c_int,
+    lfMenuFont: ::LOGFONTA,
+    lfStatusFont: ::LOGFONTA,
+    lfMessageFont: ::LOGFONTA,
+    iPaddedBorderWidth: ::c_int,
+}}
 pub type LPNONCLIENTMETRICSA = *mut NONCLIENTMETRICSA;
-#[repr(C)] #[derive(Clone, Copy)]
-pub struct NONCLIENTMETRICSW {
-    pub cbSize: ::UINT,
-    pub iBorderWidth: ::c_int,
-    pub iScrollWidth: ::c_int,
-    pub iScrollHeight: ::c_int,
-    pub iCaptionWidth: ::c_int,
-    pub iCaptionHeight: ::c_int,
-    pub lfCaptionFont: ::LOGFONTW,
-    pub iSmCaptionWidth: ::c_int,
-    pub iSmCaptionHeight: ::c_int,
-    pub lfSmCaptionFont: ::LOGFONTW,
-    pub iMenuWidth: ::c_int,
-    pub iMenuHeight: ::c_int,
-    pub lfMenuFont: ::LOGFONTW,
-    pub lfStatusFont: ::LOGFONTW,
-    pub lfMessageFont: ::LOGFONTW,
-    pub iPaddedBorderWidth: ::c_int,
-}
+STRUCT!{nodebug struct NONCLIENTMETRICSW {
+    cbSize: ::UINT,
+    iBorderWidth: ::c_int,
+    iScrollWidth: ::c_int,
+    iScrollHeight: ::c_int,
+    iCaptionWidth: ::c_int,
+    iCaptionHeight: ::c_int,
+    lfCaptionFont: ::LOGFONTW,
+    iSmCaptionWidth: ::c_int,
+    iSmCaptionHeight: ::c_int,
+    lfSmCaptionFont: ::LOGFONTW,
+    iMenuWidth: ::c_int,
+    iMenuHeight: ::c_int,
+    lfMenuFont: ::LOGFONTW,
+    lfStatusFont: ::LOGFONTW,
+    lfMessageFont: ::LOGFONTW,
+    iPaddedBorderWidth: ::c_int,
+}}
 pub type LPNONCLIENTMETRICSW = *mut NONCLIENTMETRICSW;
 //12900
 pub const MONITORINFOF_PRIMARY: ::DWORD = 1;
@@ -1642,12 +1872,11 @@ pub const RI_KEY_E0: ::DWORD = 2;
 pub const RI_KEY_E1: ::DWORD = 4;
 pub const RI_KEY_TERMSRV_SET_LED: ::DWORD = 8;
 pub const RI_KEY_TERMSRV_SHADOW: ::DWORD = 0x10;
-#[repr(C)] #[derive(Debug)] #[allow(missing_copy_implementations)]
-pub struct RAWHID {
-    pub dwSizeHid: ::DWORD,
-    pub dwCount: ::DWORD,
-    pub bRawData: [::BYTE; 0],
-}
+STRUCT!{struct RAWHID {
+    dwSizeHid: ::DWORD,
+    dwCount: ::DWORD,
+    bRawData: [::BYTE; 0],
+}}
 pub type PRAWHID = *mut RAWHID;
 pub type LPRAWHID = *mut RAWHID;
 STRUCT!{struct RAWINPUT {
@@ -1810,36 +2039,32 @@ STRUCT!{struct MENUITEMINFOW {
 }}
 pub type LPMENUITEMINFOW = *mut MENUITEMINFOW;
 pub type LPCMENUITEMINFOW = *const MENUITEMINFOW;
-#[repr(C)] #[derive(Copy)]
-pub struct MSGBOXPARAMSA {
-    pub cbSize: ::UINT,
-    pub hwndOwner: ::HWND,
-    pub hInstance: ::HINSTANCE,
-    pub lpszText: ::LPCSTR,
-    pub lpszCaption: ::LPCSTR,
-    pub dwStyle: ::DWORD,
-    pub lpszIcon: ::LPCSTR,
-    pub dwContextHelpId: ::DWORD_PTR,
-    pub lpfnMsgBoxCallback: ::MSGBOXCALLBACK,
-    pub dwLanguageId: ::DWORD,
-}
-impl Clone for MSGBOXPARAMSA { fn clone(&self) -> MSGBOXPARAMSA { *self } }
+STRUCT!{nodebug struct MSGBOXPARAMSA {
+    cbSize: ::UINT,
+    hwndOwner: ::HWND,
+    hInstance: ::HINSTANCE,
+    lpszText: ::LPCSTR,
+    lpszCaption: ::LPCSTR,
+    dwStyle: ::DWORD,
+    lpszIcon: ::LPCSTR,
+    dwContextHelpId: ::DWORD_PTR,
+    lpfnMsgBoxCallback: ::MSGBOXCALLBACK,
+    dwLanguageId: ::DWORD,
+}}
 pub type PMSGBOXPARAMSA = *mut MSGBOXPARAMSA;
 pub type LPMSGBOXPARAMSA = *mut MSGBOXPARAMSA;
-#[repr(C)] #[derive(Copy)]
-pub struct MSGBOXPARAMSW {
-    pub cbSize: ::UINT,
-    pub hwndOwner: ::HWND,
-    pub hInstance: ::HINSTANCE,
-    pub lpszText: ::LPCWSTR,
-    pub lpszCaption: ::LPCWSTR,
-    pub dwStyle: ::DWORD,
-    pub lpszIcon: ::LPCWSTR,
-    pub dwContextHelpId: ::DWORD_PTR,
-    pub lpfnMsgBoxCallback: ::MSGBOXCALLBACK,
-    pub dwLanguageId: ::DWORD,
-}
-impl Clone for MSGBOXPARAMSW { fn clone(&self) -> MSGBOXPARAMSW { *self } }
+STRUCT!{nodebug struct MSGBOXPARAMSW {
+    cbSize: ::UINT,
+    hwndOwner: ::HWND,
+    hInstance: ::HINSTANCE,
+    lpszText: ::LPCWSTR,
+    lpszCaption: ::LPCWSTR,
+    dwStyle: ::DWORD,
+    lpszIcon: ::LPCWSTR,
+    dwContextHelpId: ::DWORD_PTR,
+    lpfnMsgBoxCallback: ::MSGBOXCALLBACK,
+    dwLanguageId: ::DWORD,
+}}
 pub type PMSGBOXPARAMSW = *mut MSGBOXPARAMSW;
 pub type LPMSGBOXPARAMSW = *mut MSGBOXPARAMSW;
 STRUCT!{struct HELPINFO {
@@ -1856,6 +2081,9 @@ pub fn GET_WHEEL_DELTA_WPARAM(wParam: ::WPARAM) -> ::c_short {
 }
 pub fn GET_KEYSTATE_WPARAM(wparam: ::WPARAM) -> ::c_int {
     ::LOWORD(wparam as ::DWORD) as ::c_short as ::c_int
+}
+pub fn GET_XBUTTON_WPARAM(wparam: ::WPARAM) -> ::c_int {
+    ::HIWORD(wparam as ::DWORD) as ::c_int
 }
 pub const SIF_RANGE: ::UINT = 0x0001;
 pub const SIF_PAGE: ::UINT = 0x0002;
@@ -2032,3 +2260,14 @@ pub const DI_IMAGE: ::UINT = 0x0002;
 pub const DI_NORMAL: ::UINT = 0x0003;
 pub const DI_COMPAT: ::UINT = 0x0004;
 pub const DI_DEFAULTSIZE: ::UINT = 0x0008;
+// if WINVER >= 0x0601
+// GetSystemMetrics(SM_DIGITIZER) flag values
+pub const NID_INTEGRATED_TOUCH: ::UINT = 0x00000001;
+pub const NID_EXTERNAL_TOUCH: ::UINT = 0x00000002;
+pub const NID_INTEGRATED_PEN: ::UINT = 0x00000004;
+pub const NID_EXTERNAL_PEN: ::UINT = 0x00000008;
+pub const NID_MULTI_INPUT: ::UINT = 0x00000040;
+pub const NID_READY: ::UINT = 0x00000080;
+// end if WINVER >= 0x0601 
+
+

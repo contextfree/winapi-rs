@@ -20,31 +20,28 @@ FLAGS!{ enum DXGI_OVERLAY_SUPPORT_FLAG {
     DXGI_OVERLAY_SUPPORT_FLAG_SCALING = 0x2,
 }}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DXGI_DECODE_SWAP_CHAIN_DESC {
-    pub Flags: ::UINT,
-}
+STRUCT!{struct DXGI_DECODE_SWAP_CHAIN_DESC {
+    Flags: ::UINT,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DXGI_FRAME_STATISTICS_MEDIA {
-    pub PresentCount: ::UINT,
-    pub PresentRefreshCount: ::UINT,
-    pub SyncRefreshCount: ::UINT,
-    pub SyncQPCTime: ::LARGE_INTEGER,
-    pub SyncGPUTime: ::LARGE_INTEGER,
-    pub CompositionMode: ::DXGI_FRAME_PRESENTATION_MODE,
-    pub ApprovedPresentDuration: ::UINT,
-}
+STRUCT!{struct DXGI_FRAME_STATISTICS_MEDIA {
+    PresentCount: ::UINT,
+    PresentRefreshCount: ::UINT,
+    SyncRefreshCount: ::UINT,
+    SyncQPCTime: ::LARGE_INTEGER,
+    SyncGPUTime: ::LARGE_INTEGER,
+    CompositionMode: ::DXGI_FRAME_PRESENTATION_MODE,
+    ApprovedPresentDuration: ::UINT,
+}}
 
-#[repr(C)] #[derive(Clone, Copy, Debug)]
-pub struct DXGI_MATRIX_3X2_F {
-    pub _11: ::FLOAT,
-    pub _12: ::FLOAT,
-    pub _21: ::FLOAT,
-    pub _22: ::FLOAT,
-    pub _31: ::FLOAT,
-    pub _32: ::FLOAT,
-}
+STRUCT!{struct DXGI_MATRIX_3X2_F {
+    _11: ::FLOAT,
+    _12: ::FLOAT,
+    _21: ::FLOAT,
+    _22: ::FLOAT,
+    _31: ::FLOAT,
+    _32: ::FLOAT,
+}}
 
 RIDL!(
 interface IDXGIDecodeSwapChain(IDXGIDecodeSwapChainVtbl): IUnknown(IUnknownVtbl) {
@@ -132,20 +129,3 @@ interface IDXGISwapChainMedia(IDXGISwapChainMediaVtbl): IUnknown(IUnknownVtbl) {
 });
 
 pub const DXGI_CREATE_FACTORY_DEBUG: ::UINT = 0x1;
-
-DEFINE_GUID!(IID_IDXGIDevice3,0x6007896c,0x3244,0x4afd,0xbf,0x18,0xa6,0xd3,0xbe,
-    0xda,0x50,0x23);
-DEFINE_GUID!(IID_IDXGISwapChain2,0xa8be2ac4,0x199f,0x4946,0xb3,0x31,0x79,0x59,
-    0x9f,0xb9,0x8d,0xe7);
-DEFINE_GUID!(IID_IDXGIOutput2,0x595e39d1,0x2724,0x4663,0x99,0xb1,0xda,0x96,0x9d,
-    0xe2,0x83,0x64);
-DEFINE_GUID!(IID_IDXGIFactory3,0x25483823,0xcd46,0x4c7d,0x86,0xca,0x47,0xaa,0x95,
-    0xb8,0x37,0xbd);
-DEFINE_GUID!(IID_IDXGIDecodeSwapChain,0x2633066b,0x4514,0x4c7a,0x8f,0xd8,0x12,
-    0xea,0x98,0x05,0x9d,0x18);
-DEFINE_GUID!(IID_IDXGIFactoryMedia,0x41e7d1f2,0xa591,0x4f7b,0xa2,0xe5,0xfa,0x9c,
-    0x84,0x3e,0x1c,0x12);
-DEFINE_GUID!(IID_IDXGISwapChainMedia,0xdd95b90b,0xf05f,0x4f6a,0xbd,0x65,0x25,
-    0xbf,0xb2,0x64,0xbd,0x84);
-DEFINE_GUID!(IID_IDXGIOutput3,0x8a6bb301,0x7e7e,0x41F4,0xa8,0xe0,0x5b,0x32,0xf7,
-    0xf9,0x9b,0x18);
