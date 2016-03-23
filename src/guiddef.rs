@@ -1,6 +1,6 @@
 // Copyright © 2015, Peter Atashian
 // Licensed under the MIT License <LICENSE.md>
-STRUCT_EQ!{struct GUID {
+STRUCT{struct GUID {
     Data1: ::c_ulong,
     Data2: ::c_ushort,
     Data3: ::c_ushort,
