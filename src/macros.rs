@@ -89,7 +89,7 @@ macro_rules! RIDL {
         ),+}
     ) => {
         #[repr(C)] #[allow(missing_copy_implementations)]
-        pub  $vtbl {
+        pub struct $vtbl {
             $(pub $method: unsafe extern "system" fn(
                 This: *mut $interface
                 $(,$p: $t)*
