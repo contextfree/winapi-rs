@@ -51,18 +51,18 @@ extern "system" {
     // pub fn WindowsCompareStringOrdinal();
     // pub fn WindowsConcatString();
     pub fn WindowsCreateString(
-        sourceString: PCNZWCH, length: UINT32, string: *mut HSTRING
+        sourceString: PCNZWCH, length: UINT32, string: *mut HSTRING,
     ) -> HRESULT;
     pub fn WindowsCreateStringReference(
         sourceString: PCWSTR, length: UINT32,
-        hstringHeader: *mut HSTRING_HEADER, string: *mut HSTRING
+        hstringHeader: *mut HSTRING_HEADER, string: *mut HSTRING,
     ) -> HRESULT; 
     // pub fn WindowsDeleteString();
     // pub fn WindowsDeleteStringBuffer();
     // pub fn WindowsDuplicateString();
     // pub fn WindowsGetStringLen();
     pub fn WindowsGetStringRawBuffer(
-        string: HSTRING, length: *mut UINT32
+        string: HSTRING, length: *mut UINT32,
     ) -> PCWSTR;
     // pub fn WindowsInspectString();
     // pub fn WindowsIsStringEmpty();
